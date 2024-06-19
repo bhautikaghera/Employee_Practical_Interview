@@ -1,0 +1,50 @@
+﻿@model EmployeeTest.Models.Employee
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "employeeForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.HiddenFor(m => m.Id)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @required = "required" })
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @required = "required", @type = "email" })
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone, new { @pattern = @"\d{10}" })
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.State)
+        @Html.DropDownListFor(m => m.State, new SelectList(new[] { "Gujarat", "Maharashtra" }), "--Select State--", new { @required = "required", @id = "stateDropdown" })
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.City)
+        @Html.DropDownListFor(m => m.City, new List<SelectListItem>(), "--Select City--", new { @required = "required", @id = "cityDropdown" })
+    </div>
+
+    <div>
+        @Html.CheckBox("agreeCheckbox", false, new { @id = "agreeCheckbox" })
+        @Html.Label("agreeCheckbox", "Agree?")
+    </div>
+
+    <div>
+        <button type="submit" id="submitButton" disabled>Submit</button>
+        <button type="button" id="cancelButton">Cancel</button>
+    </div>
+}
